@@ -5,6 +5,10 @@ export default defineConfig({
   themeConfig: {
     name: 'mi-hooks',
   },
+  resolve: {
+    atomDirs: [{ type: 'hook', dir: 'src/hooks' }],
+  },
+
   extraBabelPlugins: [
     [
       'babel-plugin-import',

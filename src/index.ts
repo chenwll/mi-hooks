@@ -1,1 +1,3 @@
-export { default as Foo } from './Foo';
+import useHttp from './hooks/useHttp';
+
+export { useHttp };
