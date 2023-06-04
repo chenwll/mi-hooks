@@ -1,7 +1,7 @@
 import { Button, Form, Input, Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useEffect } from 'react';
-import useHttp from '../../../hooks/useHttp';
+import useHttp from '..';
 import { getList } from './services/Demo1Services';
 
 interface DataType {
