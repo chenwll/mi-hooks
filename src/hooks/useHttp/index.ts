@@ -15,7 +15,6 @@ interface Props {
 type Status = {
   success: boolean;
   pending: boolean;
-  done: boolean;
   error: boolean;
 }; // 异步状态
 
@@ -27,7 +26,6 @@ export default (props: Props) => {
   const [status, setStatus] = useState<Status>({
     success: false,
     pending: false,
-    done: false,
     error: false,
   });
 
@@ -47,7 +45,7 @@ export default (props: Props) => {
       setStatus({ ...status, pending: true });
       fetchFn({ ...params, ...data })
         .then((res: Record<string, any>) => {
-          if (isFunction(filterList)) {
+          if (filterList && isFunction(filterList)) {
             setList(filterList(res));
           } else {
             setList(res);

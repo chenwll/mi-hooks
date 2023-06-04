@@ -1,16 +1,14 @@
 ---
 hero:
-  title: library
-  description: A react library developed with dumi
+  title: mi-hooks
+  # description: A react library developed with dumi
   actions:
-    - text: Hello
-      link: /
-    - text: World
-      link: /
+    - text: 开始
+      link: /hooks/over-veiw
 features:
-  - title: Hello
+  - title: 快速开发
     emoji: 💎
-    description: Put hello description here
+    description: 常见的自定义Hooks
   - title: World
     emoji: 🌈
     description: Put world description here
