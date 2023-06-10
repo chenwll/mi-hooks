@@ -1,47 +1,30 @@
 import { act, renderHook } from '@testing-library/react';
 import useHttp from '../index';
 
-// interface Query {
-//     name:'string';
-// }
-
+jest.mock('axios');
 describe('useHttp', () => {
-  const asyncFn = () => {
-    return Promise.resolve({
-      list: [],
+  it('挂载时调用', async () => {
+    const resp = [
+      {
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+      },
+    ];
+    const requestFn = () => {
+      return Promise.resolve(resp);
+    };
+    const { result } = renderHook(() => useHttp({ fetchFn: requestFn }));
+    const [list, getData] = result.current;
+    expect(getData).toBeCalledTimes(0);
+    act(result.current[1]);
+    expect(list[0]).toEqual({
+      key: '1',
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park',
     });
-  };
-  // let searchType = 'name';
-
-  const form: any = {
-    fieldsValue: {},
-    getFieldsValue() {
-      return this.fieldsValue;
-    },
-    setFieldsValue(values: object) {
-      this.fieldsValue = {
-        ...this.fieldsValue,
-        ...values,
-      };
-    },
-    resetFields() {
-      this.fieldsValue = {};
-    },
-  };
-
-  let hook: any;
-
-  const setUp = (options: any) => renderHook(() => useHttp(options));
-
-  it('should fetch first render', async () => {
-    form.resetFields();
-    act(() => {
-      hook = setUp({
-        fetchFn: asyncFn,
-      });
-    });
-    const [data, , status] = hook;
-    expect(data).toBe([]);
-    expect(status.pending).toBe(true);
+    expect(requestFn).toBeCalledTimes(1);
   });
 });
